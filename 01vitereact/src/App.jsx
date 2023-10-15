@@ -1,8 +1,9 @@
+import { Apptwo } from "./Function"
 
 function App() {
 
   return (
-  <h1>Chai aur React with Vite | M.Hasan </h1>
+    <Apptwo/>
   )
 }
 
