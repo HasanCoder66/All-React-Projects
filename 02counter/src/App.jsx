@@ -10,7 +10,11 @@ function App() {
   const addValueHandler = () => {
    
       setCount(count + 1)
-    
+      
+      // setCount( prevCount => prevCount + 1)
+      // setCount( prevCount => prevCount + 1)
+      // setCount( prevCount => prevCount + 1)
+     
     
   }
 
