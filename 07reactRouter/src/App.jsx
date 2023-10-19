@@ -6,12 +6,8 @@ import Home from './components/Home/Home'
 
 function App() {
 
-  return (
-  
-{/* <div className="text-3xl font-bold underline">
-  REact Router Dom
-  </div>    */}
-   
+  return (   
+   <></>
   )
 }
 
