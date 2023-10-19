@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 function useCurrencyInfo(currency) {
   console.log(currency);
   const { data, setData } = useState({});
-  useEffect(() => {
+  useEffect( async ()  => {
     try {
-      const fetchData = fetch(
+      const fetchData = await fetch(
         `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json`
       )
         .then((res) => res.json)
