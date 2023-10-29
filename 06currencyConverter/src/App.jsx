@@ -1,5 +1,5 @@
 import React from "react";
-import { useState , useCallback , useEffect } from "react";
+import { useState      } from "react";
 import { InputBox } from "./components/";
 import useCurrencyInfo from './hooks/useCurrencyInfo'
 import "./App.css";
@@ -12,9 +12,9 @@ function App() {
   const [convertedAmount, setConvertedAmount] = useState(0);
 
   const currencyInfo = useCurrencyInfo(from)
-  console.log(currencyInfo)
+  // console.log(currencyInfo)
 
-//   const options = Object.keys(currencyInfo)
+  const options = Object.keys(currencyInfo)
 
   const swap = () => {
     setFrom(to)
@@ -30,9 +30,10 @@ function App() {
   return (
     <div
       className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
-      style={{
-        backgroundImage: `url(https://images.pexels.com/photos/3532540/pexels-photo-3532540.jpeg?auto=compress&cs=tinysrgb&w1260&h=750&dpr=2')`,
-      }}
+      // style={{
+      //   backgroundImage: `url('https://media.istockphoto.com/id/528219721/vector/dollar-sign-for-background.jpg?s=612x612&w=0&k=20&c=V4AhDrXC5oidLiGJ6c0u-KH3iFmLh0lhQTTCbQ5JdIw=')`,
+      // }}
+      
     >
       <div className="w-full">
         <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
@@ -46,7 +47,7 @@ function App() {
               <InputBox 
               label="From"
               amount={amount}
-            //   currencyOptions={options}
+              currencyOptions={options}
               onCurrencyChange={(currency) => setAmount(amount)}
               selectCurrency={from}
               onAmountChange={(amount) => setAmount(amount)}
@@ -66,7 +67,7 @@ function App() {
               <InputBox
                label="To"
                amount={convertedAmount}
-            //    currencyOptions={options}
+              //  currencyOptions={options}
                onCurrencyChange={(currency) => setTo(currency)}
                selectCurrency={from}
                amountDisable

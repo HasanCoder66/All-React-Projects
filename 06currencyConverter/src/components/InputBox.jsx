@@ -5,7 +5,7 @@ function InputBox({
     amount,
     onAmountChange,
     onCurrencyChange,
-    currencyOptions = [] ,
+    currencyOptions = ["inr"] ,
     selectCurrency = "usd" ,
     amountDisable = false,
     currencyDisable = false,
@@ -44,7 +44,8 @@ function InputBox({
                 >
                     
                         {currencyOptions.map((currency)=> 
-                        <option key={c} value={ c} >
+                        // console.log(currency)
+                        <option key={currency} value={ currency} >
                            {currency}
                         </option> )}
                 
