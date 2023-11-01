@@ -1,13 +1,38 @@
-
-import './App.css'
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { logout, login } from "./Store/authSlice";
+import { Header, Footer } from "./components/index";
+import authService from "./appwrite/auth";
+import "./App.css";
+import { Outlet } from "react-router-dom";
 
 function App() {
-console.log(import.meta.env.VITE_APPWRITE_URL)
-  return (
-    <>
-      <h1>Mega Blog App With Appwrite</h1>
-    </>
-  )
+  const [isLoading, setIsloading] = useState();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    authService
+      .getCurrentUser()
+      .then((userDate) => {
+        if (userDate) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => setIsloading(false));
+  }, []);
+  return !isLoading ? (
+    <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
+      <div className="w-full block">
+        <Header />
+        <main>
+          TODO : <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </div>
+  ) : null;
 }
 
-export default App
+export default App;
