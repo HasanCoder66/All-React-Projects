@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Container from "./Container/Container"; 
 import Input from '../components/input/Input'
 import Button from '../components/button/Button'
+import RTE from "./Rte/RTE";
 
 export { Header, Footer, LogoutBtn, Logo, Container , Input ,
-    Button};
+    Button , RTE};
