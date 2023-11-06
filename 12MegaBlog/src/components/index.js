@@ -8,10 +8,10 @@ import Button from "../components/button/Button";
 import RTE from "./Rte/RTE";
 import Signup from "../components/signup/Signup";
 import Login from "../components/login/Login";
-import Post from "../components/postCard/PostCard";
 import PostForm from "./postForm/PostForm";
 import PostCard from "../components/postCard/PostCard";
-
+import Select from '../components/select/Select';
+import AuthLayout from '../components/AuthLayout/AuthLayout'
 
 export {
   Header,
@@ -24,7 +24,8 @@ export {
   RTE,
   Signup,
   Login,
-  Post,
   PostForm, 
-  PostCard
+  PostCard,
+  Select,
+  AuthLayout
 };

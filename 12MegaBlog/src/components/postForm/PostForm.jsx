@@ -3,7 +3,7 @@ import { Button, RTE, Input, Select } from "../index";
 import { useForm } from "react-hook-form";
 import appwriteService from "../../appwrite/mainConfig";
 import { useNavigate } from "react-router-dom";
-import { UseSelector, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 function PostForm({ post }) {
   const {
