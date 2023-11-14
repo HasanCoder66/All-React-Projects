@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import authService from "../../appwrite/auth";
-import { login } from "../../Store/authSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../Store/authSlice";
 import { Button, Input, Logo } from "../index";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
 function Signup() {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const [error, setError] = useState("");
 
   const create = async (data) => {
     setError("");
@@ -24,6 +24,7 @@ function Signup() {
     } catch (error) {
       setError(error.message);
     }
+    console.log(error.message)
   };
   return (
     <div className="flex items-center justify-center">
@@ -80,7 +81,7 @@ function Signup() {
                 required: true,
               })}
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" >
               Create Account
             </Button>
           </div>

@@ -57,6 +57,7 @@ function PostForm({ post }) {
   };
 
   const slugTransform = useCallback((value) => {
+    console.log(value)
     if (value && typeof value === "String")
       return value
         .trim()
