@@ -22,9 +22,9 @@ function PostForm({ post }) {
     },
   });
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.auth.userData);
+  const userData = useSelector((state) => state?.auth?.userData);
 
-  // console.log(state)
+  console.log(userData)
 
   const submit = async (data) => {
     if (post) {
@@ -46,6 +46,7 @@ function PostForm({ post }) {
       }
     } else {
       const file = await appwriteService.uploadFile(data.Image[0]);
+
       if (file) {
         const fileId = file.$id;
         data.FeaturedImage = fileId;
@@ -62,7 +63,7 @@ function PostForm({ post }) {
   };
 
 
-  
+
   const slugTransform = useCallback((value) => {
     // console.log(value)
     if (value && typeof value === "String")
@@ -76,7 +77,7 @@ function PostForm({ post }) {
   }, []);
 
   useEffect(() => {
-    const subscription = watch((value, { name }) => {
+    const subscription = watch ((value, { name }) => {
       if (name === "Title") {
         setValue("slug", slugTransform(value.Title, { shouldValidate: true }));
       }
