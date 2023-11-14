@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect } from "react";
-import { Button, RTE, Input, Select } from "../index";
 import { useForm } from "react-hook-form";
+import { Button, RTE, Input, Select } from "../index";
 import appwriteService from "../../appwrite/mainConfig";
 import { useNavigate } from "react-router-dom";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     control,
     getValues,
-    setValue,
   } = useForm({
     defaultValues: {
       Title: post?.Title || "",
@@ -22,42 +22,49 @@ function PostForm({ post }) {
     },
   });
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.auth.userData);
+
+  // console.log(state)
 
   const submit = async (data) => {
     if (post) {
       const file = data.Image[0]
         ? appwriteService.uploadFile(data.Image[0])
         : null;
-    }
-    if (file) {
-      appwriteService.deleteFile(post.FeaturedImage);
-    }
-    const dbPost = await appwriteService.updatePost(post.$id, {
-      ...data,
-      FeaturedImage: file ? file.$id : undefined,
-    });
 
-    if (dbPost) {
-      navigate(`/post${dbPost.$id}`);
-    } else {
-      const file = await appwriteService.uploadFile(data.Image[0]);
-    }
-    if (file) {
-      const fileId = file.$id;
-      data.FeaturedImage = fileId;
-      const dbPost = await appwriteService.createPost({
+      if (file) {
+        appwriteService.deleteFile(post.FeaturedImage);
+      }
+
+      const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
-        UserId: userData.$id,
+        FeaturedImage: file ? file.$id : undefined,
       });
+
       if (dbPost) {
         navigate(`/post${dbPost.$id}`);
+      }
+    } else {
+      const file = await appwriteService.uploadFile(data.Image[0]);
+      if (file) {
+        const fileId = file.$id;
+        data.FeaturedImage = fileId;
+        const dbPost = await appwriteService.createPost({
+          ...data,
+          UserId: userData.$id,
+        });
+
+        if (dbPost) {
+          navigate(`/post${dbPost.$id}`);
+        }
       }
     }
   };
 
+
+  
   const slugTransform = useCallback((value) => {
-    console.log(value)
+    // console.log(value)
     if (value && typeof value === "String")
       return value
         .trim()
